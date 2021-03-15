@@ -13,6 +13,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(value = "*")
 @RestController
 public class ShowRestController {
 

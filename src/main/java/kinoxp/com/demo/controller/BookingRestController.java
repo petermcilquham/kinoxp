@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.QueryCreationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(value = "*")
 @RestController
 public class BookingRestController {
 
