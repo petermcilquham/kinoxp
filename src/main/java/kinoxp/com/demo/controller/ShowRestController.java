@@ -25,9 +25,8 @@ public class ShowRestController {
         return showsRepository.save (show);
     }
 
-    @GetMapping("/show/title")
-    public List<ShowsEntity> findShowByTitle() {
-        String title = "Jaws 9";
+    @GetMapping("/showt/{title}")
+    public List<ShowsEntity> findShowByTitle(@PathVariable String title) {
         return showsRepository.findShowByTitle(title);
     }
 
@@ -36,9 +35,8 @@ public class ShowRestController {
         return showsRepository.findAll();
     }
 
-    @GetMapping("/show/genre")
-    public List<ShowsEntity> findShowByGenre(WebRequest wr) {
-        String genre = "Horror";
+    @GetMapping("/showg/{genre}")
+    public List<ShowsEntity> findShowByGenre(@PathVariable String genre) {
         return showsRepository.findShowByGenre(genre);
     }
 

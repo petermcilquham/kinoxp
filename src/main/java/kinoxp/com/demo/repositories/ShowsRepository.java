@@ -12,11 +12,11 @@ import java.util.List;
 public interface ShowsRepository extends JpaRepository<ShowsEntity, Integer> {
 
     //find movie by title
-    @Query("FROM ShowsEntity WHERE movieTitle = ?1")
+    @Query("FROM ShowsEntity WHERE movieTitle like %?1%")
     List<ShowsEntity> findShowByTitle(String movieTitle);
 
     //find movie by genre
-    @Query("FROM ShowsEntity WHERE genre = ?1")
+    @Query("FROM ShowsEntity WHERE genre like %?1%")
     List<ShowsEntity> findShowByGenre(String genre);
 
     //delete movie by id
