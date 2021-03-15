@@ -7,9 +7,8 @@ import kinoxp.com.demo.repositories.ShowsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,20 +19,16 @@ public class ShowRestController {
     @Autowired
     ShowsRepository showsRepository;
 
-    @GetMapping("/show/{id}")
-    public ResponseEntity<ShowsEntity> findShowById(@PathVariable Integer id) {
-        Optional<ShowsEntity> tmpShow = showsRepository.findById(id);
-        if (tmpShow.isPresent()) {
-            ShowsEntity realShow = tmpShow.get();
-            return new ResponseEntity<>(realShow, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
+    @PostMapping(value="/show/create", consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ShowsEntity postShow(@RequestBody ShowsEntity show) {
+        return showsRepository.save (show);
     }
 
     @GetMapping("/show/title")
     public List<ShowsEntity> findShowByTitle() {
-        return showsRepository.findShowByTitle("Jaws 9");
+        String title = "Jaws 9";
+        return showsRepository.findShowByTitle(title);
     }
 
     @GetMapping("/show/all")
@@ -42,8 +37,9 @@ public class ShowRestController {
     }
 
     @GetMapping("/show/genre")
-    public List<ShowsEntity> findShowByGenre() {
-        return showsRepository.findShowByGenre("Action");
+    public List<ShowsEntity> findShowByGenre(WebRequest wr) {
+        String genre = "Horror";
+        return showsRepository.findShowByGenre(genre);
     }
 
 }
