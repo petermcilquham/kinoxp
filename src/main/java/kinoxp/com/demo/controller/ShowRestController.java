@@ -2,6 +2,7 @@ package kinoxp.com.demo.controller;
 
 import kinoxp.com.demo.model.ShowsEntity;
 import kinoxp.com.demo.repositories.ShowsRepository;
+import kinoxp.com.demo.service.FilterShowsByDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Sort;
@@ -13,21 +14,28 @@ import java.util.List;
 @CrossOrigin(value = "*")
 @RestController
 public class ShowRestController {
+    FilterShowsByDate filterShowsByDate = new FilterShowsByDate();
 
     @Autowired
     ShowsRepository showsRepository;
+
+    //see all shows
+    @GetMapping("/shows/all")
+    public List<ShowsEntity> findAllSorted() {
+        return showsRepository.findAllSorted(Sort.by("date"));
+    }
+    //see shows before 3 months
+    @GetMapping("/shows/filtered")
+    public List<ShowsEntity> findFiltered() {
+        List<ShowsEntity> temp = showsRepository.findAllSorted(Sort.by("date"));
+        return filterShowsByDate.returnFilteredShowList(temp);
+    }
 
     //create show
     @PostMapping(value="/shows/create", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public ShowsEntity postShow(@RequestBody ShowsEntity show) {
         return showsRepository.save(show);
-    }
-
-    //see all shows
-    @GetMapping("/shows/all")
-    public List<ShowsEntity> findAllSorted() {
-        return showsRepository.findAllSorted(Sort.by("date"));
     }
 
     //edit show
