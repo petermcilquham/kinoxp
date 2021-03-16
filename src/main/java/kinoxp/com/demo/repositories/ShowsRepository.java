@@ -1,15 +1,17 @@
 package kinoxp.com.demo.repositories;
 
-import kinoxp.com.demo.model.BookingsEntity;
 import kinoxp.com.demo.model.ShowsEntity;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.sql.Time;
-import java.util.Date;
 import java.util.List;
 
 public interface ShowsRepository extends JpaRepository<ShowsEntity, Integer> {
+
+    //find all movies sorted by date
+    @Query("FROM ShowsEntity")
+    List<ShowsEntity> findAllSorted(Sort sort);
 
     //find movie by title
     @Query("FROM ShowsEntity WHERE movieTitle like %?1%")
@@ -24,6 +26,6 @@ public interface ShowsRepository extends JpaRepository<ShowsEntity, Integer> {
     ShowsEntity deleteShow(int showId);
 
     //edit a movie's hall, date and start time by id
-    @Query("UPDATE ShowsEntity SET cinemaHall = ?1, date = ?2, startTime = ?3 WHERE showId = ?4")
-    ShowsEntity editBooking(int newCinemaHall, Date newDate, Time newStartTime, int showId);
+//    @Query("UPDATE ShowsEntity SET cinemaHall = ?1, date = ?2, startTime = ?3 WHERE showId = ?4")
+//    ShowsEntity editShow(int newCinemaHall, Date newDate, Time newStartTime, int showId);
 }
