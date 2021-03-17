@@ -48,8 +48,14 @@ public class BookingRestController {
 
     //find booking by phone number
     @GetMapping("/booking/search/{phoneNum}")
-    public BookingsEntity findBooking(@PathVariable int phoneNum) {
+    public List<BookingsEntity> findBooking(@PathVariable String phoneNum) {
         return bookingsRepository.searchBooking(phoneNum);
+    }
+
+    //find booking by id, for print booking
+    @GetMapping("/booking/print/{id}")
+    public BookingsEntity printBooking(@PathVariable Integer id) {
+        return bookingsRepository.printBooking(id);
     }
 
 }

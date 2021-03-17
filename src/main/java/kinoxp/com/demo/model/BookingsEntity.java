@@ -8,7 +8,7 @@ import java.util.Objects;
 public class BookingsEntity {
     private int bookingId;
     private String customerName;
-    private int customerMobileNumber;
+    private String customerMobileNumber;
     private int showId;
     private Integer cinemaHallId;
     private int seatNum01;
@@ -39,11 +39,11 @@ public class BookingsEntity {
 
     @Basic
     @Column(name = "customer_mobile_number")
-    public int getCustomerMobileNumber() {
+    public String getCustomerMobileNumber() {
         return customerMobileNumber;
     }
 
-    public void setCustomerMobileNumber(int customerMobileNumber) {
+    public void setCustomerMobileNumber(String customerMobileNumber) {
         this.customerMobileNumber = customerMobileNumber;
     }
 
