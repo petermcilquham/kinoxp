@@ -1,11 +1,9 @@
 package kinoxp.com.demo.controller;
 
 import kinoxp.com.demo.model.BookingsEntity;
-import kinoxp.com.demo.model.ShowsEntity;
 import kinoxp.com.demo.repositories.BookingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

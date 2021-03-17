@@ -3,7 +3,6 @@ package kinoxp.com.demo.model;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -13,7 +12,7 @@ public class ShowsEntity {
     private int showId;
     private String movieTitle;
     private int cinemaHall;
-    private LocalDate date;
+    private Date date;
     private Time startTime;
     private Time duration;
     private String genre;
@@ -53,11 +52,11 @@ public class ShowsEntity {
 
     @Basic
     @Column(name = "date")
-    public LocalDate getLocalDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setLocalDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
