@@ -25,17 +25,23 @@ public class ShowRestController {
         return showsRepository.findAllSorted(Sort.by("date"));
     }
     //see shows before 3 months
-    @GetMapping("/shows/filtered")
-    public List<ShowsEntity> findFiltered() {
-        List<ShowsEntity> temp = showsRepository.findAllSorted(Sort.by("date"));
-        return filterShowsByDate.returnFilteredShowList(temp);
-    }
+//    @GetMapping("/shows/filtered")
+//    public List<ShowsEntity> findFiltered() {
+//        List<ShowsEntity> temp = showsRepository.findAllSorted(Sort.by("date"));
+//        return filterShowsByDate.returnFilteredShowList(temp);
+//    }
 
     //create show
     @PostMapping(value="/shows/create", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public ShowsEntity postShow(@RequestBody ShowsEntity show) {
         return showsRepository.save(show);
+    }
+
+    //find show by id
+    @GetMapping("/shows/{id}")
+    public ShowsEntity movieById(@PathVariable Integer id){
+        return showsRepository.showMovieById(id);
     }
 
     //edit show
@@ -66,5 +72,7 @@ public class ShowRestController {
     public List<ShowsEntity> findShowByGenre(@PathVariable String genre) {
         return showsRepository.findShowByGenre(genre);
     }
+
+
 
 }

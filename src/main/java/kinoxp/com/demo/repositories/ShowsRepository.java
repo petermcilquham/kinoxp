@@ -17,6 +17,10 @@ public interface ShowsRepository extends JpaRepository<ShowsEntity, Integer> {
     @Query("FROM ShowsEntity WHERE movieTitle like %?1%")
     List<ShowsEntity> findShowByTitle(String movieTitle);
 
+    //show movie by id
+    @Query("FROM ShowsEntity WHERE showId = ?1")
+    ShowsEntity showMovieById(int showId);
+
     //find movie by genre
     @Query("FROM ShowsEntity WHERE genre like %?1%")
     List<ShowsEntity> findShowByGenre(String genre);

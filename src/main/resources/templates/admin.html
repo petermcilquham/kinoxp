@@ -7,8 +7,8 @@
 <body>
 
     <div>
-        <form>
-            <label><input type="text" name="Name" id="Name" placeholder="Employee Name" required></label>
+        <form id="addShift" action="/admin/addshift" method="post" enctype="multipart/form-data">
+            <label><input type="text" name="employeeName" id="employeeName" placeholder="Employee Name" required></label>
             <label><input type="date" id="WorkDate" name="WorkDate" required></label>
             <label><input type="time" id="StartHour" name="StartHour"> </label>
             <label><input type="time" id="EndHour" name="EndHour"> </label>
