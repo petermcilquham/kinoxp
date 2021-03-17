@@ -21,6 +21,7 @@ public class ShowsEntity {
     private byte[] movieImg;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "show_id")
     public int getShowId() {
         return showId;

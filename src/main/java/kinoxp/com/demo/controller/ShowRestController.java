@@ -9,7 +9,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Time;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(value = "*")
 @RestController
@@ -41,7 +43,28 @@ public class ShowRestController {
     //edit show
     @PutMapping("/shows/edit")
     public ShowsEntity editShow(@RequestBody ShowsEntity show){
-        return showsRepository.save(show);
+        ShowsEntity newShow = showsRepository.findById(show.getShowId());
+
+        if(show.getMovieTitle().length() > 2){
+            newShow.setMovieTitle(show.getMovieTitle());
+        }
+        if(show.getCinemaHall() != 0){
+            newShow.setCinemaHall(show.getCinemaHall());
+        }
+        if(show.getDate() != null){
+            newShow.setDate(show.getDate());
+        }
+        if(show.getGenre().length() > 2){
+            newShow.setGenre(show.getGenre());
+        }
+        if(show.getAgeReq() != null){
+            newShow.setAgeReq(show.getAgeReq());
+        }
+        if(show.getStars().length() > 2){
+            newShow.setStars(show.getStars());
+        }
+
+        return showsRepository.save(newShow);
     }
 
     //delete show
@@ -65,6 +88,12 @@ public class ShowRestController {
     @GetMapping("/showgenre/{genre}")
     public List<ShowsEntity> findShowByGenre(@PathVariable String genre) {
         return showsRepository.findShowByGenre(genre);
+    }
+
+    //find show by id
+    @GetMapping("/showid/{id}")
+    public ShowsEntity findById(@PathVariable int id) {
+        return showsRepository.findById(id);
     }
 
 }

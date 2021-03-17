@@ -48,7 +48,7 @@ public class BookingRestController {
 
     //find booking by phone number
     @GetMapping("/booking/search/{phoneNum}")
-    public BookingsEntity findBooking(@PathVariable Integer phoneNum) {
+    public BookingsEntity findBooking(@PathVariable int phoneNum) {
         return bookingsRepository.searchBooking(phoneNum);
     }
 
