@@ -40,7 +40,7 @@ public class BookingRestController {
     @DeleteMapping("/booking/delete/{id}")
     public void deleteBooking(@PathVariable Integer id) {
         try{
-            bookingsRepository.deleteBooking(id);
+            bookingsRepository.deleteById(id);
         } catch(EmptyResultDataAccessException e){
             System.out.println("FEJL I DELETE -" + e.getMessage());
         }

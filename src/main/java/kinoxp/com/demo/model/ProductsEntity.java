@@ -1,5 +1,7 @@
 package kinoxp.com.demo.model;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Objects;

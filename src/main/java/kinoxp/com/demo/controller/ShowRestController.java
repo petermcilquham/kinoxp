@@ -41,36 +41,43 @@ public class ShowRestController {
     //edit show
     @PutMapping("/shows/edit")
     public ShowsEntity editShow(@RequestBody ShowsEntity show){
-        ShowsEntity newShow = showsRepository.findById(show.getShowId());
-
-        if(show.getMovieTitle().length() > 2){
-            newShow.setMovieTitle(show.getMovieTitle());
-        }
-        if(show.getCinemaHall() != 0){
-            newShow.setCinemaHall(show.getCinemaHall());
-        }
-        if(show.getDate() != null){
-            newShow.setDate(show.getDate());
-        }
-        if(show.getGenre().length() > 2){
-            newShow.setGenre(show.getGenre());
-        }
-        if(show.getAgeReq() != null){
-            newShow.setAgeReq(show.getAgeReq());
-        }
-        if(show.getStars().length() > 2){
-            newShow.setStars(show.getStars());
-        }
-
-        return showsRepository.save(newShow);
+//        ShowsEntity newShow = showsRepository.findById(show.getShowId());
+//
+//        if(show.getMovieTitle().length() > 2){
+//            newShow.setMovieTitle(show.getMovieTitle());
+//        }
+//        if(show.getCinemaHall() != 0){
+//            newShow.setCinemaHall(show.getCinemaHall());
+//        }
+//        if(show.getDate() != null){
+//            newShow.setDate(show.getDate());
+//        }
+//        if(show.getGenre().length() > 2){
+//            newShow.setGenre(show.getGenre());
+//        }
+//        if(show.getAgeReq() != null){
+//            newShow.setAgeReq(show.getAgeReq());
+//        }
+//        if(show.getStars().length() > 2){
+//            newShow.setStars(show.getStars());
+//        }
+//
+//        return showsRepository.save(newShow);
+        return showsRepository.save(show);
     }
+
+    //patch show
+//    @PatchMapping("/shows/patch")
+//    public ShowsEntity patchShow(@RequestBody ShowsEntity show) {
+//        return showsRepository.save(show);
+//    }
 
     //delete show
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/shows/delete/{id}")
     public void deleteShow(@PathVariable Integer id){
         try{
-            showsRepository.deleteShow(id);
+            showsRepository.deleteById(id);
         } catch(EmptyResultDataAccessException e) {
             System.out.println("FEJL I DELETE -" + e.getMessage());
         }
@@ -90,7 +97,7 @@ public class ShowRestController {
 
     //find show by id
     @GetMapping("/showid/{id}")
-    public ShowsEntity findById(@PathVariable int id) {
+    public List<ShowsEntity> findById(@PathVariable int id) {
         return showsRepository.findById(id);
     }
 

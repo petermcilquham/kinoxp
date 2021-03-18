@@ -25,12 +25,9 @@ public interface ShowsRepository extends JpaRepository<ShowsEntity, Integer> {
     @Query("FROM ShowsEntity WHERE genre like %?1%")
     List<ShowsEntity> findShowByGenre(String genre);
 
+    //find movie by id
     @Query("from ShowsEntity where showId = ?1")
-    ShowsEntity findById(int id);
-
-    //delete movie by id
-    @Query("DELETE FROM ShowsEntity WHERE showId = ?1")
-    ShowsEntity deleteShow(int showId);
+    List<ShowsEntity> findById(int id);
 
     //edit a movie's hall, date and start time by id
 //    @Query("UPDATE ShowsEntity SET cinemaHall = ?1, date = ?2, startTime = ?3 WHERE showId = ?4")
