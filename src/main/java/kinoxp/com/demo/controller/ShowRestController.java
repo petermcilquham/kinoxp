@@ -3,12 +3,15 @@ package kinoxp.com.demo.controller;
 import kinoxp.com.demo.model.ShowsEntity;
 import kinoxp.com.demo.repositories.ShowsRepository;
 import kinoxp.com.demo.service.FilterShowsByDate;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin(value = "*")
@@ -39,38 +42,38 @@ public class ShowRestController {
     }
 
     //edit show
-    @PutMapping("/shows/edit")
-    public ShowsEntity editShow(@RequestBody ShowsEntity show){
-//        ShowsEntity newShow = showsRepository.findById(show.getShowId());
-//
-//        if(show.getMovieTitle().length() > 2){
-//            newShow.setMovieTitle(show.getMovieTitle());
-//        }
-//        if(show.getCinemaHall() != 0){
-//            newShow.setCinemaHall(show.getCinemaHall());
-//        }
-//        if(show.getDate() != null){
-//            newShow.setDate(show.getDate());
-//        }
-//        if(show.getGenre().length() > 2){
-//            newShow.setGenre(show.getGenre());
-//        }
-//        if(show.getAgeReq() != null){
-//            newShow.setAgeReq(show.getAgeReq());
-//        }
-//        if(show.getStars().length() > 2){
-//            newShow.setStars(show.getStars());
-//        }
-//
-//        return showsRepository.save(newShow);
-        return showsRepository.save(show);
-    }
+    @PutMapping("/shows/edit/{id}")
+    public ResponseEntity<ShowsEntity> editShow(@PathVariable(value="id") Integer id, @Valid @RequestBody ShowsEntity show) throws ResourceNotFoundException {
+        ShowsEntity showsEntity = showsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("error"));
 
-    //patch show
-//    @PatchMapping("/shows/patch")
-//    public ShowsEntity patchShow(@RequestBody ShowsEntity show) {
-//        return showsRepository.save(show);
-//    }
+        if(show.getMovieTitle() != null){
+            showsEntity.setMovieTitle(show.getMovieTitle());
+        }
+        if(show.getCinemaHall() != 0){
+            showsEntity.setCinemaHall(show.getCinemaHall());
+        }
+        if(show.getDate() != null){
+            showsEntity.setDate(show.getDate());
+        }
+        if(show.getStartTime() != null){
+            showsEntity.setStartTime(show.getStartTime());
+        }
+        if(show.getDuration() != null){
+            showsEntity.setDuration(show.getDuration());
+        }
+        if(show.getGenre() != null){
+            showsEntity.setGenre(show.getGenre());
+        }
+        if(show.getAgeReq() != null){
+            showsEntity.setAgeReq(show.getAgeReq());
+        }
+        if(show.getStars() != null){
+            showsEntity.setStars(show.getStars());
+        }
+
+        final ShowsEntity updatedShowsEntity = showsRepository.save(showsEntity);
+        return ResponseEntity.ok(updatedShowsEntity);
+    }
 
     //delete show
     @ResponseStatus(HttpStatus.NO_CONTENT)

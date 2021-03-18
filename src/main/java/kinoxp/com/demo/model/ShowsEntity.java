@@ -1,7 +1,5 @@
 package kinoxp.com.demo.model;
 
-import org.hibernate.annotations.DynamicUpdate;
-
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
@@ -145,5 +143,21 @@ public class ShowsEntity {
         int result = Objects.hash(showId, movieTitle, cinemaHall, date, startTime, duration, genre, ageReq, stars);
         result = 31 * result + Arrays.hashCode(movieImg);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ShowsEntity{" +
+                "showId=" + showId +
+                ", movieTitle='" + movieTitle + '\'' +
+                ", cinemaHall=" + cinemaHall +
+                ", date=" + date +
+                ", startTime=" + startTime +
+                ", duration=" + duration +
+                ", genre='" + genre + '\'' +
+                ", ageReq=" + ageReq +
+                ", stars='" + stars + '\'' +
+                ", movieImg=" + Arrays.toString(movieImg) +
+                '}';
     }
 }
