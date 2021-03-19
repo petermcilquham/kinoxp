@@ -1,7 +1,6 @@
 package kinoxp.com.demo.controller;
 
 import kinoxp.com.demo.model.BookingsEntity;
-import kinoxp.com.demo.model.ShowsEntity;
 import kinoxp.com.demo.repositories.BookingsRepository;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

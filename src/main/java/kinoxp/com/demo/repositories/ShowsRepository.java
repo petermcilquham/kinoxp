@@ -29,7 +29,4 @@ public interface ShowsRepository extends JpaRepository<ShowsEntity, Integer> {
     @Query("from ShowsEntity where showId = ?1")
     List<ShowsEntity> findById(int id);
 
-    //edit a movie's hall, date and start time by id
-//    @Query("UPDATE ShowsEntity SET cinemaHall = ?1, date = ?2, startTime = ?3 WHERE showId = ?4")
-//    ShowsEntity editShow(int newCinemaHall, Date newDate, Time newStartTime, int showId);
 }
