@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ShowsRepository extends JpaRepository<ShowsEntity, Integer> {
+public interface ShowRepository extends JpaRepository<ShowsEntity, Integer> {
 
     //find all movies sorted by date
     @Query("FROM ShowsEntity")

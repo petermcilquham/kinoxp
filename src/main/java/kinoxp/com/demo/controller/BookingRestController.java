@@ -1,7 +1,7 @@
 package kinoxp.com.demo.controller;
 
 import kinoxp.com.demo.model.BookingsEntity;
-import kinoxp.com.demo.repositories.BookingsRepository;
+import kinoxp.com.demo.repositories.BookingRepository;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -17,25 +17,25 @@ import java.util.List;
 public class BookingRestController {
 
     @Autowired
-    BookingsRepository bookingsRepository;
+    BookingRepository bookingRepository;
 
     //see all bookings
     @GetMapping("/booking/all")
     public List<BookingsEntity> findAll() {
-        return bookingsRepository.findAll();
+        return bookingRepository.findAll();
     }
 
     //create booking
     @PostMapping(value="/booking/create", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public BookingsEntity postBooking(@RequestBody BookingsEntity booking) {
-        return bookingsRepository.save(booking);
+        return bookingRepository.save(booking);
     }
 
     //edit booking
     @PutMapping("/booking/edit/{id}")
     public ResponseEntity<BookingsEntity> editBooking(@PathVariable(value="id") Integer id, @Valid @RequestBody BookingsEntity booking) throws ResourceNotFoundException {
-        BookingsEntity bookingsEntity = bookingsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("error"));
+        BookingsEntity bookingsEntity = bookingRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("error"));
 
         if(booking.getCustomerName() != null){
             bookingsEntity.setCustomerName(booking.getCustomerName());
@@ -65,16 +65,16 @@ public class BookingRestController {
             bookingsEntity.setSeatNum05(booking.getSeatNum05());
         }
 
-        final BookingsEntity updatedBookingEntity = bookingsRepository.save(bookingsEntity);
+        final BookingsEntity updatedBookingEntity = bookingRepository.save(bookingsEntity);
         return ResponseEntity.ok(updatedBookingEntity);
     }
 
     //delete booking
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/booking/delete/{id}")
+    @GetMapping("/booking/delete/{id}")
     public void deleteBooking(@PathVariable Integer id) {
         try{
-            bookingsRepository.deleteById(id);
+            bookingRepository.deleteById(id);
         } catch(EmptyResultDataAccessException e){
             System.out.println("FEJL I DELETE -" + e.getMessage());
         }
@@ -83,13 +83,13 @@ public class BookingRestController {
     //find booking by phone number
     @GetMapping("/booking/search/{phoneNum}")
     public List<BookingsEntity> findBooking(@PathVariable String phoneNum) {
-        return bookingsRepository.searchBooking(phoneNum);
+        return bookingRepository.searchBooking(phoneNum);
     }
 
     //find booking by id, for print booking
     @GetMapping("/booking/print/{id}")
     public BookingsEntity printBooking(@PathVariable Integer id) {
-        return bookingsRepository.printBooking(id);
+        return bookingRepository.printBooking(id);
     }
 
 }

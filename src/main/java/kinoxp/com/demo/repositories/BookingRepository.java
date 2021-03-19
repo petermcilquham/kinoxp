@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface BookingsRepository extends JpaRepository<BookingsEntity, Integer> {
+public interface BookingRepository extends JpaRepository<BookingsEntity, Integer> {
 
     //find booking by customer mobile number
     @Query("FROM BookingsEntity WHERE customerMobileNumber like %?1%")
