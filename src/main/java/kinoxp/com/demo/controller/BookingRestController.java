@@ -72,7 +72,7 @@ public class BookingRestController {
 
     //delete booking
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/booking/delete/{id}")
+    @GetMapping("/booking/delete/{id}")
     public void deleteBooking(@PathVariable Integer id) {
         try{
             bookingsRepository.deleteById(id);
