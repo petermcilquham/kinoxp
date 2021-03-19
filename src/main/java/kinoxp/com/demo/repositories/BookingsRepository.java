@@ -16,7 +16,4 @@ public interface BookingsRepository extends JpaRepository<BookingsEntity, Intege
     @Query("FROM BookingsEntity WHERE bookingId = ?1")
     BookingsEntity printBooking(int id);
 
-    //edit seat number in booking by id
-//    @Query("UPDATE BookingsEntity SET seatNum01 = ?1 WHERE bookingId = ?2")
-//    BookingsEntity editBooking(int newSeat, int bookingId);
 }
