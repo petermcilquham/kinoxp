@@ -8,6 +8,7 @@ import java.util.Objects;
 @Table(name = "products", schema = "kinoxp")
 public class ProductsEntity {
     private int productId;
+    private String productType;
     private String productName;
     private double price;
     private byte[] productImg;
@@ -23,6 +24,16 @@ public class ProductsEntity {
     }
 
     @Basic
+    @Column(name = "product_type")
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
+
+    @Basic
     @Column(name = "product_name")
     public String getProductName() {
         return productName;
@@ -31,6 +42,8 @@ public class ProductsEntity {
     public void setProductName(String productName) {
         this.productName = productName;
     }
+
+
 
     @Basic
     @Column(name = "price")
@@ -65,7 +78,7 @@ public class ProductsEntity {
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(productId, productName, price);
+        int result = Objects.hash(productId, productType, productName, price);
         result = 31 * result + Arrays.hashCode(productImg);
         return result;
     }
