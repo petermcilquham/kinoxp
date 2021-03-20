@@ -9,24 +9,24 @@ import java.util.List;
 
 public interface ShowRepository extends JpaRepository<ShowsEntity, Integer> {
 
-    //find all movies sorted by date
+    //find all show sorted by date
     @Query("FROM ShowsEntity")
     List<ShowsEntity> findAllSorted(Sort sort);
 
-    //find movie by title
+    //find show by title
     @Query("FROM ShowsEntity WHERE movieTitle like %?1%")
     List<ShowsEntity> findShowByTitle(String movieTitle);
 
-    //show movie by id
+    //show show by id
     @Query("FROM ShowsEntity WHERE showId = ?1")
     ShowsEntity showMovieById(int showId);
 
-    //find movie by genre
+    //find show by genre
     @Query("FROM ShowsEntity WHERE genre like %?1%")
     List<ShowsEntity> findShowByGenre(String genre);
 
-    //find movie by id
+    //find show by id
     @Query("from ShowsEntity where showId = ?1")
-    List<ShowsEntity> findById(int id);
+    ShowsEntity findByIdCustom(int id);
 
 }

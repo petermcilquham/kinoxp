@@ -138,4 +138,6 @@ public class BookingsEntity {
     public int hashCode() {
         return Objects.hash(bookingId, customerName, customerMobileNumber, showId, cinemaHallId, seatNum01, seatNum02, seatNum03, seatNum04, seatNum05);
     }
+
+
 }

@@ -42,9 +42,9 @@ public class ShowRestController {
     }
 
     //edit show
-    @PutMapping("/shows/edit/{id}")
-    public ResponseEntity<ShowsEntity> editShow(@PathVariable(value="id") Integer id, @Valid @RequestBody ShowsEntity show) throws ResourceNotFoundException {
-        ShowsEntity showsEntity = showRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("error"));
+    @PutMapping("/shows/edit")
+    public ResponseEntity<ShowsEntity> editShow(@Valid @RequestBody ShowsEntity show) throws ResourceNotFoundException {
+        ShowsEntity showsEntity = showRepository.findById(show.getShowId()).orElseThrow(() -> new ResourceNotFoundException("error"));
 
         if(show.getMovieTitle() != null){
             showsEntity.setMovieTitle(show.getMovieTitle());
@@ -100,8 +100,8 @@ public class ShowRestController {
 
     //find show by id
     @GetMapping("/showid/{id}")
-    public List<ShowsEntity> findById(@PathVariable int id) {
-        return showRepository.findById(id);
+    public ShowsEntity findById(@PathVariable int id) {
+        return showRepository.findByIdCustom(id);
     }
 
 }

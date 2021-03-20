@@ -33,35 +33,36 @@ public class BookingRestController {
     }
 
     //edit booking
-    @PutMapping("/booking/edit/{id}")
-    public ResponseEntity<BookingsEntity> editBooking(@PathVariable(value="id") Integer id, @Valid @RequestBody BookingsEntity booking) throws ResourceNotFoundException {
-        BookingsEntity bookingsEntity = bookingRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("error"));
+    @PutMapping("/booking/edit")
+    public ResponseEntity<BookingsEntity> editBooking(@Valid @RequestBody BookingsEntity booking) throws ResourceNotFoundException {
+        BookingsEntity bookingsEntity = bookingRepository.findById(booking.getBookingId()).orElseThrow(() -> new ResourceNotFoundException("error"));
 
         if(booking.getCustomerName() != null){
             bookingsEntity.setCustomerName(booking.getCustomerName());
         }
+
         if(booking.getCustomerMobileNumber() != null){
             bookingsEntity.setCustomerMobileNumber(booking.getCustomerMobileNumber());
         }
         if(booking.getShowId() != 0){
             bookingsEntity.setShowId(booking.getShowId());
         }
-        if(booking.getCinemaHallId() != 0){
+        if(booking.getCinemaHallId() != null){
             bookingsEntity.setCinemaHallId(booking.getCinemaHallId());
         }
         if(booking.getSeatNum01() != 0){
             bookingsEntity.setSeatNum01(booking.getSeatNum01());
         }
-        if(booking.getSeatNum02() != 0){
+        if(booking.getSeatNum02() != null){
             bookingsEntity.setSeatNum02(booking.getSeatNum02());
         }
-        if(booking.getSeatNum03() != 0){
+        if(booking.getSeatNum03() != null){
             bookingsEntity.setSeatNum03(booking.getSeatNum03());
         }
-        if(booking.getSeatNum04() != 0){
+        if(booking.getSeatNum04() != null){
             bookingsEntity.setSeatNum04(booking.getSeatNum04());
         }
-        if(booking.getSeatNum05() != 0){
+        if(booking.getSeatNum05() != null){
             bookingsEntity.setSeatNum05(booking.getSeatNum05());
         }
 
