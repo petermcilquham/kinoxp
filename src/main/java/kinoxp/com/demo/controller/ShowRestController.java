@@ -43,7 +43,7 @@ public class ShowRestController {
 
     //edit show
     @PutMapping("/shows/edit")
-    public ResponseEntity<ShowsEntity> editShow(@Valid @RequestBody ShowsEntity show) throws ResourceNotFoundException {
+    public ResponseEntity<ShowsEntity> editShow(@Valid @RequestBody ShowsEntity show) throws ResourceNotFoundException, IllegalAccessException {
         ShowsEntity showsEntity = showRepository.findById(show.getShowId()).orElseThrow(() -> new ResourceNotFoundException("error"));
 
         if(show.getMovieTitle() != null){

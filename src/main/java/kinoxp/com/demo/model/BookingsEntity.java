@@ -17,6 +17,11 @@ public class BookingsEntity {
     private Integer seatNum04;
     private Integer seatNum05;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    //name = showsEntity show_id, referencedColumnName = bookingsEntity show_id
+    @JoinColumn(name = "show_id", referencedColumnName = "show_id")
+    private ShowsEntity showsEntity;
+
     @Id
     @Column(name = "booking_id")
     public int getBookingId() {
@@ -52,7 +57,6 @@ public class BookingsEntity {
     public int getShowId() {
         return showId;
     }
-
     public void setShowId(int showId) {
         this.showId = showId;
     }

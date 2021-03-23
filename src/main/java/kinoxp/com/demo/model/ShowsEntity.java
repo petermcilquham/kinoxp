@@ -1,6 +1,7 @@
 package kinoxp.com.demo.model;
 
 import javax.persistence.*;
+import java.lang.reflect.Field;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Arrays;
@@ -19,6 +20,9 @@ public class ShowsEntity {
     private Integer ageReq;
     private String stars;
     private byte[] movieImg;
+
+    @OneToOne(mappedBy = "shows")
+    private BookingsEntity bookingsEntity;
 
     @Id
     @Column(name = "show_id")
@@ -143,4 +147,5 @@ public class ShowsEntity {
         result = 31 * result + Arrays.hashCode(movieImg);
         return result;
     }
+
 }

@@ -16,4 +16,11 @@ public interface BookingRepository extends JpaRepository<BookingsEntity, Integer
     @Query("FROM BookingsEntity WHERE bookingId = ?1")
     BookingsEntity printBooking(int id);
 
+    //find booking by show id
+    @Query("FROM BookingsEntity WHERE showId = ?1")
+    List<BookingsEntity> findBookingByShowId(int id);
+
+    @Query("from BookingsEntity join ShowsEntity on showId = showId")
+    List<BookingsEntity> findX();
+
 }

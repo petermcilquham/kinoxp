@@ -93,4 +93,9 @@ public class BookingRestController {
         return bookingRepository.printBooking(id);
     }
 
+    //find booking by show id
+    @GetMapping("/booking/showid/{showId}")
+    public List<BookingsEntity> findBookingByShowId(@PathVariable Integer showId) {
+        return bookingRepository.findBookingByShowId(showId);
+    }
 }
