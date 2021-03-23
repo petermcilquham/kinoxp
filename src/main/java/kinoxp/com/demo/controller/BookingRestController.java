@@ -10,7 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @CrossOrigin(value = "*")
 @RestController
@@ -97,5 +100,17 @@ public class BookingRestController {
     @GetMapping("/booking/showid/{showId}")
     public List<BookingsEntity> findBookingByShowId(@PathVariable Integer showId) {
         return bookingRepository.findBookingByShowId(showId);
+    }
+
+    @GetMapping("/bookings/seats")
+    public List<Integer> findSeats(){
+        List<Integer> list1 = bookingRepository.findSeats1();
+        List<Integer> list2 = bookingRepository.findSeats2();
+        List<Integer> list3 = bookingRepository.findSeats3();
+        List<Integer> list4 = bookingRepository.findSeats4();
+        List<Integer> list5 = bookingRepository.findSeats5();
+        return Stream.of(list1, list2, list3,list4,list5)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 }

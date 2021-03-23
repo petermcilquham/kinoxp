@@ -11,14 +11,14 @@ public class BookingsEntity {
     private String customerMobileNumber;
     private int showId;
     private Integer cinemaHallId;
-    private int seatNum01;
+    private Integer seatNum01;
     private Integer seatNum02;
     private Integer seatNum03;
     private Integer seatNum04;
     private Integer seatNum05;
 
     @OneToOne(cascade = CascadeType.ALL)
-    //name = showsEntity show_id, referencedColumnName = bookingsEntity show_id
+    //name skal være showsEntity show_id, referencedColumnName = bookingsEntity show_id
     @JoinColumn(name = "show_id", referencedColumnName = "show_id")
     private ShowsEntity showsEntity;
 
