@@ -20,17 +20,15 @@ public interface BookingRepository extends JpaRepository<BookingsEntity, Integer
     @Query("FROM BookingsEntity WHERE showId = ?1")
     List<BookingsEntity> findBookingByShowId(int id);
 
-//    @Query("from BookingsEntity join ShowsEntity on showId = showId")
-//    List<BookingsEntity> findX();
-
-    @Query("select seatNum01 from BookingsEntity")
-    List<Integer> findSeats1();
-    @Query("select seatNum02 from BookingsEntity where seatNum02 is not null")
-    List<Integer> findSeats2();
-    @Query("select seatNum03 from BookingsEntity where seatNum03 is not null")
-    List<Integer> findSeats3();
-    @Query("select seatNum04 from BookingsEntity where seatNum04 is not null")
-    List<Integer> findSeats4();
-    @Query("select seatNum05 from BookingsEntity where seatNum05 is not null")
-    List<Integer> findSeats5();
+    //find seat numbers
+    @Query("select seatNum01 from BookingsEntity where showId = ?1")
+    List<Integer> findSeats1(int id);
+    @Query("select seatNum02 from BookingsEntity where seatNum02 is not null and showId = ?1")
+    List<Integer> findSeats2(int id);
+    @Query("select seatNum03 from BookingsEntity where seatNum03 is not null and showId = ?1")
+    List<Integer> findSeats3(int id);
+    @Query("select seatNum04 from BookingsEntity where seatNum04 is not null and showId = ?1")
+    List<Integer> findSeats4(int id);
+    @Query("select seatNum05 from BookingsEntity where seatNum05 is not null and showId = ?1")
+    List<Integer> findSeats5(int id);
 }

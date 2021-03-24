@@ -50,9 +50,7 @@ public class BookingRestController {
         if(booking.getShowId() != 0){
             bookingsEntity.setShowId(booking.getShowId());
         }
-        if(booking.getCinemaHallId() != null){
-            bookingsEntity.setCinemaHallId(booking.getCinemaHallId());
-        }
+
         if(booking.getSeatNum01() != 0){
             bookingsEntity.setSeatNum01(booking.getSeatNum01());
         }
@@ -102,13 +100,13 @@ public class BookingRestController {
         return bookingRepository.findBookingByShowId(showId);
     }
 
-    @GetMapping("/bookings/seats")
-    public List<Integer> findSeats(){
-        List<Integer> list1 = bookingRepository.findSeats1();
-        List<Integer> list2 = bookingRepository.findSeats2();
-        List<Integer> list3 = bookingRepository.findSeats3();
-        List<Integer> list4 = bookingRepository.findSeats4();
-        List<Integer> list5 = bookingRepository.findSeats5();
+    @GetMapping("/bookings/seats/{showId}")
+    public List<Integer> findSeatsByShowId(@PathVariable Integer showId){
+        List<Integer> list1 = bookingRepository.findSeats1(showId);
+        List<Integer> list2 = bookingRepository.findSeats2(showId);
+        List<Integer> list3 = bookingRepository.findSeats3(showId);
+        List<Integer> list4 = bookingRepository.findSeats4(showId);
+        List<Integer> list5 = bookingRepository.findSeats5(showId);
         return Stream.of(list1, list2, list3,list4,list5)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
